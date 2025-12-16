@@ -6,7 +6,7 @@
 
 ### Step 1
 
-答えを見てもいいのでとにかく正解になったらOK（[標準的な進め方[(https://docs.google.com/document/d/1bjbOSs-Ac0G_cjVzJ2Qd8URoU_0BNirZ8utS3CUAeLE/edit?tab=t.0#heading=h.6ana9osx0wrd) と同様）
+答えを見てもいいのでとにかく正解になったらOK（[標準的な進め方](https://docs.google.com/document/d/1bjbOSs-Ac0G_cjVzJ2Qd8URoU_0BNirZ8utS3CUAeLE/edit?tab=t.0#heading=h.6ana9osx0wrd)と同様）
 
 ### Step 2
 
