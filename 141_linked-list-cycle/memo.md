@@ -46,3 +46,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> aa.__hash__()
 276616076
 ```
+
+- two pointersを使う方法も書いた。https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.2k4z0wt6ytf9 で言及されているように、setを使った方法が書ければOKらしい。
+
