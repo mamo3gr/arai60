@@ -37,3 +37,12 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 ざっと眺めた。
 
+## step 3
+
+- コードはエラーなく書けた。
+
+## TODO
+
+- [ ] Pythonのリストの実装を調べる
+- [ ] 優先度付きキューを実装してみる
+
