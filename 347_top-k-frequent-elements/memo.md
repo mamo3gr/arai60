@@ -100,7 +100,9 @@ https://discord.com/channels/1084280443945353267/1367399154200088626/13713257236
 
 https://github.com/fuga-98/arai60/pull/10#discussion_r1967591652
 
-`sorted` の `key` に `dict.get` を渡すと、valueだけ返ってくるんだ。へえー。
+`iter(dict)` はキーを返す（`iter(d.keys())` のショートハンド）。  
+これまでは `dict.keys()`, `values()`, `.items()` の形でしか使えてなかった。   
+https://docs.python.org/3.11/library/stdtypes.html#dict
 
 ## step 3
 
