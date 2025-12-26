@@ -20,3 +20,44 @@
 ### 意思決定
 
 ソートにする。時間計算量は単語数が支配的だろうから、ヒストグラムを作るのがソートよりも速くても、その寄与は小さいことが予想される。空間計算量のオーダーは変わらない（たぶんソートの場合の法が多少有利）。コードの簡潔さはソートの方が有利そうで、ここが個人的に大きい（ヒストグラムをタプルで作って…みたいなのが面倒）。
+
+## step 2
+
+`normalized_` によりよい命名の余地がありそう。
+
+### 他の人のコード
+
+https://github.com/katsukii/leetcode/pull/6#discussion_r1899084266
+
+>ところで、アルファベットでないものが入ってきたら、このコードは何が起きるでしょうか。
+
+現状のコードだと、アルファベット小文字以外の文字も合わせてアナグラムかどうかを判断している。  
+よくあるケースとしては、大文字や、空白などの記号が混ざっていてグルーピングに失敗することが予想される。  
+実務的には、
+
+* 想定されていない文字を含む単語を処理せず、ログに落とす（warningレベルなど）
+* 想定されていない文字を除外して処理し、ログに落とす
+* 関数（処理）自体をraiseする
+
+あたりが考えられる。
+
+https://github.com/komdoroid/arai60/blob/14ec1184d68b0514455e688bdfc2ef39e1d787d8/HashMap/49.GroupAnagrams/memo.md
+
+`sorted_` なるほど。ちょっとhowに踏み込んでいる気もするが。
+
+https://github.com/komdoroid/arai60/pull/2/files#r2554617171
+
+>文字列を再構築せずtupleにする
+
+たしかに。
+
+https://github.com/docto-rin/leetcode/blob/a2d090a70d9800051af93c23758ce30825c58f26/0049-group-anagrams/0049-group-anagrams.md
+
+文字ごとのヒストグラムでの実装例。問題ではアルファベットの小文字だけなのでコードポイントも連続しているが、他の文字種が入ってくると扱いが大変そうだ。例えばa-zは97–122だが、A-Zは65-90で間が空いている。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.e5dwa7yj3tv0
+
+frozensetを使うという選択肢も。setとは違い、immutableかつhashable.  
+https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset
