@@ -61,3 +61,7 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 frozensetを使うという選択肢も。setとは違い、immutableかつhashable.  
 https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset
+
+## step 3
+
+ハッシュマップ (dict) には型ヒントを書いたほうが親切。型チェックも使えるし。
