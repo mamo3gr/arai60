@@ -1,14 +1,19 @@
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
         if len(nums1) > len(nums2):
-            nums1, nums2 = nums2, nums1
+            return self.intersection(nums2, nums1)
 
-        seen = set(nums1)
-        common_numbers = set()
+        lookup = set(nums1)
+        common = []
         for n in nums2:
-            if n in seen:
-                common_numbers.add(n)
-        return list(common_numbers)
+            if n in lookup:
+                common.append(n)
+                lookup.remove(n)
+         
+            if not lookup:
+                break
+
+        return common
 
     def intersectionWithoutSet(self, nums1: List[int], nums2: List[int]) -> List[int]:
         sorted1 = sorted(nums1)
