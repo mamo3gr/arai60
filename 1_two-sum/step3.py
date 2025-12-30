@@ -3,12 +3,12 @@ class Solution:
         if len(nums) < 2:
             raise ValueError(f"Array size ({len(nums)}) must be more than two.")
 
-        num_to_target = dict()
+        num_to_index = dict()
         for i, n in enumerate(nums):
             complement = target - n
-            if complement in num_to_target:
-                return [i, num_to_target[complement]]
+            if complement in num_to_index:
+                return [i, num_to_index[complement]]
             else:
-                num_to_target[n] = i
+                num_to_index[n] = i
 
         raise ValueError("No pair found.")
