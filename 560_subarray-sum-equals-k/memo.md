@@ -69,3 +69,7 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 すごく現実味のある現象の説明。
 
+## step 3
+
+いまの `n in nums` に対する累積和 `prefix_sum` と、`prefix_sum_to_count` とが混在するのがちょっと混乱のもとかも。
+
