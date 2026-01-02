@@ -8,12 +8,12 @@ class Solution:
     def _mark_connecting_islands_and_compute_area(
         self, grid: List[List[int]], visited: List[List[int]], r: int, c: int
     ) -> tuple[List[List[int]], int]:
-        NUM_ROWS = len(grid)
-        NUM_COLUMNS = len(grid[0])
+        num_rows = len(grid)
+        num_columns = len(grid[0])
 
         def is_land(r, c) -> bool:
             return (
-                0 <= r < NUM_ROWS and 0 <= c < NUM_COLUMNS and grid[r][c] == self.LAND
+                0 <= r < num_rows and 0 <= c < num_columns and grid[r][c] == self.LAND
             )
 
         connecting_islands = collections.deque()
@@ -36,12 +36,12 @@ class Solution:
         return visited, area
 
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        NUM_ROWS = len(grid)
-        NUM_COLUMNS = len(grid[0])
-        visited = [[False] * NUM_COLUMNS for _ in range(NUM_ROWS)]
+        num_rows = len(grid)
+        num_columns = len(grid[0])
+        visited = [[False] * num_columns for _ in range(num_rows)]
         max_area = 0
-        for r in range(NUM_ROWS):
-            for c in range(NUM_COLUMNS):
+        for r in range(num_rows):
+            for c in range(num_columns):
                 if grid[r][c] == self.WATER:
                     continue
 
