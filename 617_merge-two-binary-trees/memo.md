@@ -35,3 +35,66 @@ class Solution:
             right = self.mergeTrees(root1.right, root2.right)
             return TreeNode(val=val, left=left, right=right)
 ```
+
+## step 2
+
+キューを使った実装もやってみる。step1では
+
+>接続先の（親の）ノードを覚えておく必要があり
+
+と書いたが、TreeNodeでは親を辿れないので、親（根）からキューに入れて、空の＝これから値をセットして欲しい子ノードをさらにキューへ入れていく、という流れになりそう。
+
+### 他の人のコード
+
+#### https://github.com/Shoichifunyu/shofun/pull/17
+
+再帰による実装（「レビュー指摘後のリファクタ」）。root1とroot2を非対称に扱っているのが面白い。この変形は思いつかなかった。片方だけnon-Noneならばroot1がそうだと仮定していて、root1がNoneなら、root1とroot2をスワップして自身を呼び直している。
+
+あまりに面白いので自分でも書いてみた。
+
+#### https://github.com/plushn/SWE-Arai60/pull/23
+
+dequeを使った実装 (step2). キューに詰めるタプルは、自分と同様に `(node1, node2, merged)`. ノードのマージ処理を関数として括り出していて、メインのループがかなりすっきりしている。ただし、この関数内で外側にあるdequeへのpush (append) をやっていてちょっと見通しが悪い。
+
+もとの二分木に含まれるインスタンスを使い回すと結構シンプルに書ける（子ノードも引き連れた状態になっているので）。
+
+#### https://github.com/naoto-iwase/leetcode/pull/22
+
+dequeを使った実装 (step3). root1にマージすることで破壊的にやっているが、
+
+>非破壊でやるならroot1 = copy.deepcopy(root1)を追加すればいいだろう。
+
+とのこと。冒頭でdeepcopyすれば非破壊になる。なるほどー。
+
+ところでdeepcopyすると、子ノードもコピーされるんだろうか。リファレンスを見てみる。  
+https://docs.python.org/3.13/library/copy.html
+
+>A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+
+なるほどー。いちおうコードも書いて確認した。
+
+>考え方の一つとして、キューに入れるオブジェクトにNoneが入る可能性を排除する（型安全性）が良い方法に繋がった気がする。
+
+こちらもなるほど。
+
+#### https://github.com/nanae772/leetcode-arai60/pull/23
+
+スタックを使った実装 (step3). スタックには `(node1, node2, マージ先の親, 左or右)` をpushする。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.cxy3cik6kyqx
+
+破壊or非破壊の議論。ちゃんと気にできていた。
+
+https://discord.com/channels/1084280443945353267/1295357747545505833/1329746604114055191
+
+stackに `(マージ先, マージ元のlist)` を持っておく形。これはスッキリしてて良いかも。
+
+https://github.com/tarinaihitori/leetcode/pull/23#discussion_r1919824481
+
+>Python は、メンバ変数へのポインターが持てないので、どうしても繰り返し感がでますね。
+
+>C++ だとどこに書き込むかをスタックに積むことができるので、少し簡単になるのです。
+
+なるほど。Pythonだとsetattr, getattr, attrgetterあたりを使うことで近いことはできる。
