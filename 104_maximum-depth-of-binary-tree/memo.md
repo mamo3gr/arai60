@@ -63,3 +63,8 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 再帰に行きがけと帰りがけがある。
 
+## step 3
+
+本問は再帰がしっくり来る。  
+`None` な子ノードも再帰しても結果的には合うけど、ちゃんとチェックするほうが良さそう。
+
