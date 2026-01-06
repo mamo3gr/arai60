@@ -98,3 +98,8 @@ https://github.com/tarinaihitori/leetcode/pull/23#discussion_r1919824481
 >C++ だとどこに書き込むかをスタックに積むことができるので、少し簡単になるのです。
 
 なるほど。Pythonだとsetattr, getattr, attrgetterあたりを使うことで近いことはできる。
+
+## step 3
+
+自分には、本問では再帰のほうがしっくりきた。
+
