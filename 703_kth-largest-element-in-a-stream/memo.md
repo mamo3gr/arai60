@@ -43,6 +43,19 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 ## TODO
 
-- [ ] Pythonのリストの実装を調べる
+- [x] Pythonのリストの実装を調べる
 - [ ] 優先度付きキューを実装してみる
+
+## 補題
+
+### Pythonのリストの実装を調べる
+
+動的な配列として実装してある。実際にはポインタの配列である（つまり、要素に依存しない）。  
+https://github.com/python/cpython/blob/v3.13.11/Include/cpython/listobject.h#L5-L22
+
+余裕をもってアロケートしてあり、そのおかげでappendが `O(1)` である。
+
+insertは、挿入先の直後から末尾までの要素をすべてズラす必要があり `O(N)`.  
+https://github.com/python/cpython/blob/v3.13.11/Objects/listobject.c#L480
+
 
