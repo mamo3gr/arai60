@@ -46,3 +46,10 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 C++だとポインタのポインタが使えるので、Pythonよりもさらに柔軟に書ける。  
 一方でメモリリークのリスクもある。
+
+## step 3
+
+実際に書くなら再帰にすると思う。
+比較的短いコードだけど `_index` は付けたほうが親切。  
+ロジックのシンプルさを優先して、子ノードができるかどうかはひとまず再帰して、再帰先でNoneを返す。
+
