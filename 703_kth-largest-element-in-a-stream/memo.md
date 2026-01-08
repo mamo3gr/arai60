@@ -44,7 +44,7 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 ## TODO
 
 - [x] Pythonのリストの実装を調べる
-- [ ] 優先度付きキューを実装してみる
+- [x] 優先度付きキューを実装してみる
 
 ## 補題
 
@@ -58,4 +58,9 @@ https://github.com/python/cpython/blob/v3.13.11/Include/cpython/listobject.h#L5-
 insertは、挿入先の直後から末尾までの要素をすべてズラす必要があり `O(N)`.  
 https://github.com/python/cpython/blob/v3.13.11/Objects/listobject.c#L480
 
+### 優先度付きキューを実装してみる
+
+Geminiにスケルトンとテストを生成してもらって、中身の具体的なロジックを実装してみた。  
+pushでは末尾に要素を追加して、その要素と親との関係がヒープを満たすまで上げる（親と交換する）。  
+popでは先頭の要素を対比させた後で末尾の要素で置き換え、それと子が関係を満たすまで下げる。
 
