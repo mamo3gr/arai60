@@ -51,3 +51,6 @@ inner functionを再帰して、親の変数として「見つかった」フラ
 
 https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.ed3x3pkyeqkp
 
+## step 3
+
+スタックと再帰でそれぞれ実装する。
