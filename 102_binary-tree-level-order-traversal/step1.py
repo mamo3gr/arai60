@@ -21,9 +21,9 @@ class Solution:
 
             for node in nodes_to_traverse:
                 values_for_level.append(node.val)
-                if node.left:
+                if node.left is not None:
                     next_to_traverse.append(node.left)
-                if node.right:
+                if node.right is not None:
                     next_to_traverse.append(node.right)
 
             values.append(values_for_level)
@@ -45,9 +45,9 @@ class Solution:
                 values.append([])
             values[level].append(node.val)
 
-            if node.left:
+            if node.left is not None:
                 node_and_level.append((node.left, level + 1))
-            if node.right:
+            if node.right is not None:
                 node_and_level.append((node.right, level + 1))
 
         return values
