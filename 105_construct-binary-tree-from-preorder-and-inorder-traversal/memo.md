@@ -24,3 +24,61 @@ preorderの先頭は根である。同じ値をinorderで探す。inorderでは�
 * inorderから値を探す `O(N)` はもっと減らせそう
 
 rightで揃えるため、`preorder_right = preorder[-len(inorder_right):]` でpreorderの右部分木を取ろうとしたがハマった。長さ0のとき、`inorder[-0:]` となりリスト全体が返ってしまう。
+
+## step 2
+
+とりあえず再帰のまま、スライスのコピーをやめてインデックスで管理する。  
+区間を表すdataclassを作ると便利そう。名前として `span`, `interval`, `range` あたりが思いつき、`range` は予約ごと被る、`interval` は長いので `span` を採用。  
+インデックスの操作に苦戦する。いつまで経っても苦手だ、これ。
+
+もともとの関数ではlistを受け取っているので、代わりにインデックスを受け取るヘルパー関数を用意する。名前はひねらなくていいだろう。
+
+あと、`inorder` から任意の数字の位置を見つけるため、数字->インデックスのハッシュマップを用意しておく。
+
+ここまで書けると、iterativeへの変更も比較的かんたんに見えてくる。  
+preorder, inorderそれぞれの区間と、値を入れる先のノードをスタックに積んでやれば良い。
+
+### 他の人のコード
+
+#### https://github.com/docto-rin/leetcode/pull/34
+
+>- 実装  
+>  - preorderを順に走査してnodeを生成していく。  
+>  - 左に進んでいき、stackに入れていく。  
+>    - stack内は、左は処理済み（子を紐付け済み）だが右は未処理なノード  
+>  - stack[-1].valがinorder[inorder_cursor]と異なれば左に進み、等しければ一歩ずつ翻っていく。  
+>  - 一歩ずつ翻っていくとき、stack[-1].valがinorder[inorder]と異なるノードに出会ったら、その左の子の右の子としてnodeを紐づける。  
+
+別解。
+
+#### https://github.com/nanae772/leetcode-arai60/pull/29
+
+再帰 (step2). 自分の場合はpreorderとinorderとで区間を持っていたが、inorderの区間とpreorderの開始だけを引き継いでいる。たしかにpreorderで欲しいのは先頭のインデックスだけだ。
+
+冒頭で`preorder`, `inorder`の長さが等しいかチェックしている。これも丁寧。
+
+#### https://github.com/garunitule/coding_practice/pull/29
+
+改めてスライスを引き継ぐコードを見ているけど、可読性でいったらこっちのほうが圧倒的に良いよなあ。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.1rv0z8fm6lc3
+
+https://github.com/goto-untrapped/Arai60/pull/53#discussion_r1777944717
+
+>これ、典型的な小さい例から考える、みたいなことをしているんですが、たとえば、1, 2, 3 の3要素からなる木を全部列挙して、5通りあるはずですが、それぞれがどういう値になるか、くらいから考えてみたらどうでしょうか。
+
+>あー、あと、遅いコードでもいいから動くものを書いてみませんか。一回書けると速くしやすいです。
+
+解法の見つけ方。今回はうまくできた方だと思う。
+
+https://github.com/fuga-98/arai60/pull/29#discussion_r2020242408
+
+さらに別解。inorderの順に生成していく。
+
+https://github.com/Yoshiki-Iwasa/Arai60/pull/33#discussion_r1688357607
+
+`array.array` を使うと、スライスをコピーしなくても書ける。  
+https://docs.python.org/3.13/library/array.html  
+numpyにしちゃうのも有力とのこと。
