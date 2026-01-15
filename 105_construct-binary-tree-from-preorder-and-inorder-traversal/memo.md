@@ -123,3 +123,6 @@ https://github.com/nittoco/leetcode/pull/37, https://github.com/fuga-98/arai60/p
 
 Geminiに壁打ちしてもらいながら書いたが、あんまり腹落ちしていない。特に、スタックに積まれたノードに対し、右に数珠つなぎにして動くあたり。
 
+## step 3
+
+本当は不要なんだけど、preorderでの終点も持っておく（区間のdataclassを使う）のが、すっきりするししっくりくる。
