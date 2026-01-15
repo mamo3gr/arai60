@@ -116,3 +116,10 @@ while potential_parents:
         break
 ```
 
+### inorderベースの構築
+
+発想が難しい。  
+https://github.com/nittoco/leetcode/pull/37, https://github.com/fuga-98/arai60/pull/29#discussion_r2020242408 あたりを参考にやる。
+
+Geminiに壁打ちしてもらいながら書いたが、あんまり腹落ちしていない。特に、スタックに積まれたノードに対し、右に数珠つなぎにして動くあたり。
+
