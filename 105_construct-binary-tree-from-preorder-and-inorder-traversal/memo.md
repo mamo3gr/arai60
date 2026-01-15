@@ -82,3 +82,37 @@ https://github.com/Yoshiki-Iwasa/Arai60/pull/33#discussion_r1688357607
 `array.array` を使うと、スライスをコピーしなくても書ける。  
 https://docs.python.org/3.13/library/array.html  
 numpyにしちゃうのも有力とのこと。
+
+### preorderベースの構築
+
+https://github.com/docto-rin/leetcode/pull/34 で見かけた別解を、自分なりに咀嚼して書いてみる。  
+
+* `preorder[0]` は root になる。rootをスタックに積む。
+* inorderの配列を見ていくインデックスを用意する。左端=0で初期化する。
+* `preorder[1]` から順に、ノードを作り、どこに付けるかを判断する。大まかに言えば、スタック末尾のノードの左か、右である
+* スタック末尾の値と、inorderの値が等しいなら、それは木の左端に到達したということである。このときの操作は後述する
+* 左端に到達していないなら、スタック末尾のノードの左に新しいノードを付ける
+* 左端に到達しているなら、新しいノードはスタック内のノードのうち、 **いずれかの** ノードの右に付く
+  * 接続先は、inorderインデックスのインクリメントと合わせてpopしていったとき、値が等しい最後のノードである（条件を満たさなくなった、直前のノード）
+* どちらの場合でも、付けたノードをスタックに乗せる
+
+いきなりrootを置くよりも、番兵 (dummy) を置いたほうがしっくりくる。  
+特に、新しいノードを右の子に持つ親を探す際に、whileを抜けた直前ループでのpop結果を使う、という分かりにくい書き方になってしまう。
+
+```python
+while potential_parents and potential_parents[-1].val == inorder[inorder_i]:
+    parent_of_right_child = potential_parents.pop()
+    inorder_i += 1
+```
+
+番兵を置いておくと、popして条件を満たしたら抜ける（いまpopしたノードを採用）、ということが分かりやすい。ちなみに `None` はintと比較するとFalseになるので、番兵ノードのvalをNoneにしておくとif文の条件を必ず満たせる。
+
+```python
+while potential_parents:
+    parent_of_right_child = potential_parents.pop()
+    inorder_i += 1
+
+    if potential_parents[-1].val != inorder[inorder_i]:
+        break
+```
+
