@@ -133,6 +133,11 @@ https://github.com/naoto-iwase/leetcode/pull/36/changes#r2468854052
 
 LeetCodeのSolutionsや https://github.com/naoto-iwase/leetcode/pull/36 を書き写す形で書いてみて、何とか動いた。木→配列のイメージがまだあやふやなので、後で再訪したい。
 
+## step 3
+
+DPと二分探索でそれぞれ書く。  
+DPでは、わざわざdataclassを定義するまでもないかと考えたが、コメントで `tail, length` みたいなのを補足するくらいなら、コードとしてそう書いちゃったほうがいいよな、と決めた。
+
 ## TODO
 
 - [ ] セグメント木を自力で書けるようにする
