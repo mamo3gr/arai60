@@ -33,3 +33,52 @@ tabulationのパターンは後で書くとして、まずは再帰＋メモ化�
 必要なメモリは、スライス `nums[:-1]` と `nums[1:]` をコピーするための `N-1` 個のintで、28 bytes/int * (100-1) = 2.8 KB.
 メモ化は辞書で管理される認識で、key=インデックス、value=結果とすると、2 * 28 bytes/int * 100 = 5.6KB.
 
+## step 2
+
+Geminiと解法についてディスカッションしてみた。
+one-passのDPで解けないのは「`nums[0]` を取ったかどうか」を覚えておけないから。
+円環問題を解くときには、直線2つに分けて考えるのが定石らしい。実際の面接で、小さなヒントからここにたどり着けるかなあ。
+
+tabulationのパターンも書いてみた。これなら範囲の始点と終点だけを引き回せばいいので、スライスのコピーが要らなくなる。
+
+### 他の人のコード
+
+#### https://github.com/garunitule/coding_practice/pull/36
+
+2変数だけを記憶するtabulation. 変数名は `max_{one,two}_step_ago`.  
+メインに入る前の場合分けは、`not nums` と `len(nums)==1`. この2つのほうが分かりやすいかも。
+
+#### https://github.com/naoto-iwase/leetcode/pull/41
+
+2変数だけを記憶するtabulation. 変数名は `without_last`, `with_last`.  
+変数の更新でmultiple assignment（多重代入、複数代入）を使っている。  
+これなら `next_` のような一時変数が不要になる。
+
+```python
+        def rob_section(left, right):
+            without_last = 0  # max total without robbing last house
+            with_last = 0  # max total with robbing last house
+            for i in range(left, right + 1):
+                without_last, with_last = (
+                    max(without_last, with_last),
+                    without_last + nums[i]
+                )
+```
+
+https://github.com/naoto-iwase/leetcode/pull/41/changes#r2478782275
+
+>私はこの書き方あまり好きではないですが、まあ、しかし新しい変数作るよりは見やすいかもしれませんね。
+
+意図不明の `next_` が出てくるよりは、依存関係がある2変数を更新したい、という意図が分かるので、多重代入の方がマシに思える。
+
+#### https://github.com/Mike0121/LeetCode/pull/57
+
+https://github.com/Mike0121/LeetCode/pull/57#discussion_r2425654031
+
+>この場合、単に 引数の nums を円形制約なしで盗んでいるので、関数内関数でなく独立した rob_linearly のような関数とした方がわかりやすいと思いました。
+
+`linearly` なるほど。
+
+### コメント集
+
+なし。
