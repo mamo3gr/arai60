@@ -70,3 +70,18 @@ https://github.com/irohafternoon/LeetCode/pull/40#discussion_r2084763958
 >(ARM は CSEL があるようです。)
 
 CPU命令までは自分は分からない。常識の範囲は広い。
+
+### パフォーマンス測定
+
+`min_price` を更新したときに profit を計算しないことと、関数呼び出しのオーバーヘッドから、ifが定数倍速い。  
+Pythonを使っている時点で気にするほどの差でもなさそうだが。
+
+```
+--- 実行結果 (データ数: 100,000, 試行回数: 1000) ---
+min/max:   5.6720 秒
+if:        2.7700 秒
+Itertools: 5.6882 秒
+```
+
+Python 3.14.2 (main, Dec  5 2025, 16:49:16) [Clang 17.0.0 (clang-1700.4.4.1)] on darwin.
+
