@@ -15,3 +15,51 @@
 例えば前述のテストケースを改変した `[7,1,5,6]` だと、5で売らずに6で売るのが正解。  
 でもこのときって、5で売った直後に5で買っておけばいいな。そうするとトータルの利益は変わらない。
 
+計算量を見積もる。  
+処理時間については、配列長を `N` とすると `O(N)`.
+制約から `N` は最大 3 x 10^4 なので、Pythonの処理能力を10^7 steps/sec とすると、
+3 x 10^4 / 10^7 = 3ミリ秒くらいのオーダーを予想する。※簡単のため・見積もりが難しいので、ステップ数=1としている  
+メモリについては、買った価格と現在の利益合計を覚えておけばよい。intを2つ分なので28 bytes/int * 2 = 56 bytesのオーダーを予想する。
+
+## step 2
+
+### 他の人のコード
+
+#### https://github.com/tshimosake/arai60/pull/22
+
+>最適解を $\sum_{k=1}^{n-1} \max(0, p_k - p_{k-1})$ と分解できることが本質だった。
+
+当日と前日から生じる利益に分解できる、なるほど。「すぐに利確して同じ価格で買っておけば良い」のに通ずる。
+
+https://github.com/tshimosake/arai60/pull/22/changes#r2659438463  
+そうなると `itertools.pairwise` を使って関数型っぽく書ける。  
+https://docs.python.org/3.13/library/itertools.html#itertools.pairwise
+
+>二状態DP：各日で株を持っている/持っていない場合の最大利益を更新していって、最後に持っていない場合の最大利益を返す。
+
+こんな解き方もできるのか。
+
+#### https://github.com/garunitule/coding_practice/pull/38
+
+whileで谷（前日より安い）まで `i` を進めて買い、山（前日より高い）まで進めて売る。  
+`prices[i] - prices[i+1]` を for each i で見ていくのに比べて分かりにくいが、幅として書いてみる。
+
+#### https://github.com/docto-rin/leetcode/pull/43
+
+`range(1, len(prices))` で前日との差分を見ていくパターン。
+
+https://github.com/naoto-iwase/leetcode/pull/43/changes#r2469508705
+
+>株を持って日を超すか持たないで日を超すかの2択なので、それぞれどちらがよかったかを翌日に決めればいいということです。
+
+シンプルに考えればこうなるんだけど、解き始めは売る・買う・ステイなど選択肢を複雑に考えてしまっていた。
+また、ステイするのと、さっさと利確して買い直す（利益は各日の差分の総和になる）ことに気がつくのが遅かった。
+この辺の問題の解きほぐし方を上達したい。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.h6ls3sx57fel
+
+https://github.com/goto-untrapped/Arai60/pull/59#discussion_r1782748689
+
+>毎日できることは、株を持っているか、お金を持っているかの2択なので、未来が見える人になったとして、どちらがいいかを考えればいいのです。
