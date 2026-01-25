@@ -63,3 +63,8 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 https://github.com/goto-untrapped/Arai60/pull/59#discussion_r1782748689
 
 >毎日できることは、株を持っているか、お金を持っているかの2択なので、未来が見える人になったとして、どちらがいいかを考えればいいのです。
+
+## step 3
+
+`max` を使うほうがコードはシンプルなんだけど、前日からの差分で利益が出ているか見る、利益があるなら累積する、と手続きを書き下すほうがちょっとだけ分かりやすいような気がする。
+
