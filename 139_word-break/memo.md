@@ -127,7 +127,13 @@ https://discord.com/channels/1084280443945353267/1201211204547383386/12331027297
 そういう意味では、`s` を1文字ずつ増やすのではなく、for each word in wordDictで切り取れるか、を調べるほうが自然に思える。
 
 `str.startswith` は start と end が取れる。知らなかった。  
-https://docs.python.org/3/library/stdtypes.html#str.startswith
+https://docs.python.org/3/library/stdtypes.html#str.startswith  
+クエリはタプルで複数渡せる！今回は使えないけど…。
+
+## step 3
+
+手作業でやるなら、頭からwordで切り取れるかDFSするのが自分には自然。  
+`str.startswith` にどうしてもタプルを渡してみたいので、そのバージョンも書いた。
 
 ## TODO
 
