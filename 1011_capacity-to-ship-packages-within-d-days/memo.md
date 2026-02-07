@@ -107,3 +107,12 @@ for each daysで回して、その中で積めるまで積む、というロジ�
 ### コメント集
 
 https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0 を `capacity`, `ship` や `1011` で検索してみたが見つからず。
+
+## step 3
+
+練習も兼ねて、二分探索を自分でやる方を書き直す。
+個人的にはinner functionよりもstaticmethodで出すほうが好み。
+この量ならギリギリinner functionにしてもいい。
+
+lower,upperは求める値を含むのかどうか分かりにくいので、素直にmin, maxにした。
+
