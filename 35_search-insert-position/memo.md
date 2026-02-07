@@ -265,8 +265,10 @@ class Solution:
                 # leftと以降左はtargetより小さい
                 left_index = middle_index
             else:
-                # target <= nums[middle_index] だから、
-                # rightと以降右はtarget以上
+                # target <= nums[middle_index] で、
+                # target == nums[middle_index] はearly returnされているので
+                # ここに到達する場合は target < nums[middle_index]
+                # つまり、rightと以降右はtargetより大きい
                 right_index = middle_index
 
         # ループを抜けたとき、left, rightと隣り合う。不変条件から、
