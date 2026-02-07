@@ -39,3 +39,71 @@
 
 このメモを書くのも含め1時間かかってしまったが、解答を見ずにパスしたのは久しぶり。
 
+## step 2
+
+### 他の人のコード
+
+#### https://github.com/garunitule/coding_practice/pull/44
+
+方針は一緒。
+サブルーチンに切り出すのも一緒だが、`bool` ではなく所要日数を返して、
+メインルーチンでdays以内か判定している。
+好みの範囲だろうが、daysを計算する方が、メインルーチンでの二分探索の更新がバグりにくそうだし、
+汎用的に使いまわせそう。
+
+>"""
+>不変条件
+>- capacity < left_capacityの場合、daysより大きい
+>- right < capacityの場合、days以下
+>"""
+
+こういうのちゃんと書くべきだった。反省。
+
+初期値の決め方。
+
+```python
+        # len(weights)分だけ日数がかかる
+        left_capacity = max(weights)
+        # 1日で運べる
+        right_capacity = sum(weights)
+```
+
+自分は複雑に考えてたけど、これはシンプルだ。
+将来的に制約（例えば荷物あたり500とか）が変わっても対応できる。
+あと自分の場合は、下限を低く取りすぎて `weight <= capacity` のチェックをする羽目になっていた。
+
+#### https://github.com/h1rosaka/arai60/pull/46
+
+daysを二分探索する方針は一緒。サブルーチンが面白い。
+
+```python
+def can_ship_within_the_period(capacity) -> bool:
+     i = 0
+     for _ in range(days):
+         total_weight = 0
+         while total_weight + weights[i] <= capacity:
+             total_weight = total_weight + weights[i]
+             i += 1
+             if i == len(weights): # 載せきった。
+                 return True
+     return False
+```
+
+for each daysで回して、その中で積めるまで積む、というロジック。
+こっちのほうが手作業に近い。
+一方でコードとしてはちょっとぎこちない感じに見える。
+
+#### https://github.com/naoto-iwase/leetcode/pull/27
+
+`bisect_left` を使った実装。`range(capacity_high)` を渡すと、
+ありえる値の範囲をリストとして実体化しなくてもいい。
+`key` に `days` 以内に出荷できるか判定する関数を渡す。
+
+自分でも書いてみよう。
+`bisect_left` がインデックスを返すところだけ注意。
+第一引数に `(min, max+1)` を渡して後で min で下駄を履かせるか、
+引数 `lo` に min を渡すかする。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0 を `capacity`, `ship` や `1011` で検索してみたが見つからず。
