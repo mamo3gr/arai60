@@ -105,7 +105,7 @@ Step2の後半。
 ```python
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        # targetはleft自身と以降左にあり、rightより右にはないと思っている
+        # targetはleft自身とそれより右にあり、rightより右にはないと思っている
         left = 0
         right = len(nums) - 1
 
