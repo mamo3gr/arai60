@@ -137,3 +137,13 @@ https://github.com/TORUS0818/leetcode/pull/47#discussion_r2038331269
 
 ここは感覚が一緒で安心。
 
+## step 3
+
+ビット演算のケースでimplicit falseは使えるのか？Googleのスタイルガイドを読み直す。 
+https://google.github.io/styleguide/pyguide.html#2144-decision
+
+>When handling integers, implicit false may involve more risk than benefit (i.e., accidentally handling None as 0). You may compare a value which is known to be an integer (and is not the result of len()) against the integer 0.
+
+今回のケースは2文目に当てはまりそう。ビット演算しているので整数のはずで、
+`None` など想定外の型の変数が紛れ込んだらTypeErrorが送出される。
+
