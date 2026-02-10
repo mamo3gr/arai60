@@ -117,3 +117,7 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 https://discord.com/channels/1084280443945353267/1200089668901937312/1216054396161622078  
 https://stackoverflow.com/questions/109023/count-the-number-of-set-bits-in-a-32-bit-integer#109025  
 Hamming weight, popcount (population count), sideways additionとかいうらしい。
+
+## step 3
+
+木構造だと思っていて、右に行った回数だけ symbol が反転するんだ、という考え方をコードになるべく反映させたい。
