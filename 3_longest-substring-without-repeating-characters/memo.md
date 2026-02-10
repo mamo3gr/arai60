@@ -130,3 +130,7 @@ https://github.com/olsen-blue/Arai60/pull/49#discussion_r2005295464
 
 さっきのPRと同上。
 
+## step 3
+
+`default=-1` で `char_to_index` を引くのはいいが、
+`max(start, char_to_index[c] + 1)` は説明を省略しすぎていると感じる。
