@@ -106,3 +106,8 @@ https://github.com/SuperHotDogCat/coding-interview/pull/31#discussion_r164712873
 
 ポインタと、それが指すデータの処理（ここでは`total`への加算）を近くに置く。
 
+## step 3
+
+* step2ではenumerateにしてたけど、`last, last_num` みたいに受けると、インデックスなのか数字なのか紛らわしい（`num`だけにするのも、何のnumか分かりにくいので微妙）。`last` だけ受けるrangeにする。
+* `math.inf` の方が、どう考えてもinfなので分かりやすそう。
+
