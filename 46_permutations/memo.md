@@ -103,3 +103,8 @@ https://github.com/Ryotaro25/leetcode_first60/pull/54/changes/BASE..18a281be3c2a
 >それでも、最後の n はなくなります。
 
 失敗してみてこのコメントの意味が分かった。
+
+## step 3
+
+それぞれのパターンを書き直してみる。
+引き継ぐ状態を明に持っているstackバージョンが自分にはしっくりくる。
