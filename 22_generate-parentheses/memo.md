@@ -97,3 +97,7 @@ https://github.com/skypenguins/coding-practice/pull/27#discussion_r2533462366
 * 文字列のコピーは速い。
   * 100倍くらいらしい。つまりここだけC相当。
 
+## step 3
+
+バックトラッキングが自分にはしっくりきた。
+作成途中のカッコは引数として引き回す方が好み。
