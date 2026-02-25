@@ -1,15 +1,23 @@
-import collections
-
-
 class Solution:
     def moveZeroes(self, nums: list[int]) -> None:
-        zero_indices = collections.deque()
-        for i, num in enumerate(nums):
-            if num == 0:
-                zero_indices.append(i)
-                continue
+        nonzero_index = 0
+        zero_index = 0
 
-            if zero_indices:
-                zero_index = zero_indices.popleft()
-                nums[i], nums[zero_index] = nums[zero_index], nums[i]
-                zero_indices.append(i)
+        while nonzero_index < len(nums) and zero_index < len(nums):
+            while zero_index < len(nums) and nums[zero_index] != 0:
+                zero_index += 1
+            if zero_index >= len(nums):
+                return
+
+            while nonzero_index < len(nums) and nums[nonzero_index] == 0:
+                nonzero_index += 1
+            if nonzero_index >= len(nums):
+                return
+
+            if zero_index < nonzero_index:
+                nums[zero_index], nums[nonzero_index] = (
+                    nums[nonzero_index],
+                    nums[zero_index],
+                )
+            else:
+                nonzero_index = zero_index
