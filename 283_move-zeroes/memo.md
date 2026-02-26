@@ -121,3 +121,8 @@ https://github.com/hroc135/leetcode/pull/51#discussion_r2052911267
 
 Linked Listなら、頭から舐めてゼロならお尻に移す、が `O(1)` でできる。
 自分でも書いてみよう (`step2_linked_list.py`)
+
+## step 3
+
+「次に非ゼロ要素を配置すべきインデックス」を覚えておいてswapの実装 (step2-2.py) が、
+シンプルだししっくりくる。
