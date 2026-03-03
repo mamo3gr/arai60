@@ -102,3 +102,12 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 
 Javaには、オーバーフローしたら例外を投げてくれる関数 `multiplyExact`, `addExact` がある。
 
+## step 3
+
+実装済みの関数や機能に頼る。
+
+leading zeroesは `int()` のパースに任せてよい。
+符号もパースできるが、`-`（符号だけ、数字なし）のようなパターンを弾く必要があるので、
+先に符号だけ自前で確定したあとで数字の範囲を探したほうが処理が楽そう。
+
+Pythonなのでオーバーフロー対策は特に必要なし。
