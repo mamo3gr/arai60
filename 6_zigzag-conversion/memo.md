@@ -80,3 +80,9 @@ Generator expressionによる2重内包表記。目の左右の動きがきつ�
 
 周期は `2 * (numRows - 1)` で、この周期ごとで `itertools.batched` を使って `s` をchunk単位にする。
 chunk内は `row_index` の処理が比較的簡単。
+
+## step 3
+
+`direction` を決めてから `row_index` を更新する、という順番だとコードはすっきりする。
+`list[list[str]]` に append, 最後にflattenしてstrにする、というのが分かりやすい。
+2重内包表記は目が滑るのでfor文で展開する。
