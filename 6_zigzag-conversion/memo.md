@@ -27,3 +27,56 @@ zigzagの方向のうち、下降しているのか、斜め上に行ってい�
 `numRows = 1` のときのインデックス処理に一度躓いた。
 2以上のときは、次の行 `row` が更新されたあと、最下部や最上部に当たっていたら方向を変える、とするが、
 1のときにはvalidな範囲を超えてしまう。いったん min, max で戻すことにするが、もう少しいい方法がありそう。
+
+## step 2
+
+ChatGPTにレビューしてもらいながらコードを整理する。
+`numRows = 1` の場合は早期終了することで、進行方向を返るロジック（前述）がシンプルになる。
+あと引数 `numRows` のsnake_caseでの置き直しを止めた。
+
+### 他の人のコード
+
+#### https://github.com/Satorien/LeetCode/pull/59
+
+下降している、かつ境界を超えていたら、方向を変えてインデックスを修正してcontinue, というのができる (step1).
+そのループではカウンタを進めない。
+
+行ごとに都度joinしたstrを持つ (step2), というパターンもあるが、strがimmutableなので都度生成することになる。
+メリットは `list.extend()` がなくなり僅かに可読性が上がる。
+
+方向をboolではなく1, -1で持つパターン (step3).
+
+#### https://github.com/naoto-iwase/leetcode/pull/61
+
+二重のwhileループ (step1). 底を打つまで下降、先頭に戻るまで上昇、という動きが分かりやすい。
+
+`rows`, `row` とあったとき、後者は `rows` の要素なのかインデックスなのか分かりづらい (step3).
+
+#### https://github.com/shintaro1993/arai60/pull/64
+
+周期性から `row_index` を求められるっぽい。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.6oum2lb2o7j4
+
+#### https://github.com/saagchicken/coding_practice/pull/22/changes/BASE..bfa74b398f6e52de5fef3d930288b21029ae2d2d#r2009413184
+
+`row_index` をGeneratorで送り込むアイデア。
+
+#### https://github.com/saagchicken/coding_practice/pull/22#discussion_r2009416979
+
+Generator expressionによる2重内包表記。目の左右の動きがきつい。
+
+#### https://github.com/saagchicken/coding_practice/pull/22#discussion_r2009508424
+
+>この問題、出題意図は、お手玉できるか、な気もします。
+> 
+>Generator は内部的には、ある種のコンテキストを持っていて、計算の続きに戻れるようにしています。だから、それなりに重いです。
+> 
+>そういうわけで、手続き型の手法で構造を組み合わせられるかが想定だろうなと思います。
+
+#### https://github.com/olsen-blue/Arai60/pull/61#discussion_r2040670667
+
+周期は `2 * (numRows - 1)` で、この周期ごとで `itertools.batched` を使って `s` をchunk単位にする。
+chunk内は `row_index` の処理が比較的簡単。
