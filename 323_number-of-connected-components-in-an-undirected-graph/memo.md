@@ -19,8 +19,33 @@
 処理時間とメモリ使用量を見積もる。
 時間計算量は `O(n x e)`. ただし `e` はエッジ数。
 for each edgeのループの中で、親の伝搬をするのに `n` 個のノードの親を舐める必要がある
-（これは双方向に引けるようにしたら `O(1)` で済むのかも？）。
+（これは双方向に引けるようにしたら `O(1)` で済むのかも？ -> findするときに繋ぎ変えればよかった）。
 Pythonの処理能力を 10^7 steps/sec とすると、
 2000 * 5000 / 10^7 = 1秒のオーダー。なんとか終わるか。
 空間計算量は `O(n)`. 各ノードの親を覚えておく必要がある。
 28 bytes/int * 2000 = 56KB のオーダーを予想する。
+
+## step 2
+
+### 他の人のコード
+
+#### https://github.com/Hiroto-Iizuka/coding_practice/pull/19
+
+DFS. 隣接リスト `graph: dict[int, list[int]]` と、訪問済みノードを `visited: set` で覚える。
+
+#### https://github.com/xbam326/leetcode/pull/21
+
+DFSでは関数で再帰するほか、whileで書いちゃう幅もある (step3).
+
+#### https://github.com/docto-rin/leetcode/pull/28
+
+UnionFindで親を辿るための経路を効率化する方法があった記憶だが、ここに全部書いてあった。ありがたい。
+findするときに、再帰的にfindして、rootにつなぎ替えてしまえばいい。
+また、サイズが大きいgroupに小さいgroupをぶら下げたほうが、木の高さが抑制できるらしい。
+これらを踏まえてもう一度書いてみる。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.aza5ygjw59gj
+
+見出しだけあってリンクなし。
