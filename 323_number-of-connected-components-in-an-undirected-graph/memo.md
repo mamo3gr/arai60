@@ -49,3 +49,11 @@ findするときに、再帰的にfindして、rootにつなぎ替えてしま�
 https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.aza5ygjw59gj
 
 見出しだけあってリンクなし。
+
+## step 3
+
+DFS版は再帰するほどでもないので、スタックで書き直す。
+ついでに開始ノードも合わせてvisitedにするように関数を変更する。
+
+2ヶ月前に[Max Area of Islande](https://leetcode.com/problems/max-area-of-island/)を解いていた当時は
+UnionFindをスクラッチで書ける気がしていなかったが、苦も無く書けるようになっていた。
