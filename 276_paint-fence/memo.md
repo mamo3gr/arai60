@@ -81,3 +81,46 @@ nがインクリメントされるとき、`f(n-1, k)` に `k` を単純にか�
 空間計算量も `O(N)`. `f(n,k)` と `g(n,k)` を保存しておく領域が必要。
 （と書いて気がついたが、`n` と `n-1` の場合だけ覚えておけばいいので、`O(1)` でもいける）。
 
+## step 2
+
+ChatGPTにレビューしてもらいながらコードを整理する。
+
+* 状態遷移の式が分かりにくい
+  * 末尾が同じ組み合わせの数を `same[i]`, 異なる組み合わせの数を `diff[i]` とすると次のように遷移する
+    * same[i] = diff[i-1]
+    * diff[i] = (same[i-1] + diff[i-1]) * (k-1)
+* 空間計算量は `O(1)` にできる
+
+### 他の人のコード
+
+#### https://github.com/naoto-iwase/leetcode/pull/35
+
+ChatGPTの指摘と同じく、末尾が同じ組み合わせ・異なる組み合わせを更新するパターン (step1).
+
+`T_i = (k-1)(T_{i-1} + T_{i-2})` という漸化式で書けるらしい。
+展開したときの第一項は、末尾が異なるように塗るパターン。
+第二項は、末尾が同じになるように塗るパターン。`i-2` の状態から `k-1` 通りの色を2連続で塗る。
+
+>漸化式を線形変換による行列表現に直し、冪乗法を適用すると、時間計算量がO(n) -> O(log n)になるとのこと
+
+へぇー。
+
+#### https://github.com/garunitule/coding_practice/pull/30
+
+空間計算量を `O(1)` にする版では、添字がなくなるので、余計に操作している変数と、考えている添字が分かりにくい。
+
+#### https://github.com/shintaro1993/arai60/pull/34
+
+k^n 通りの塗り方をすべて作って、条件を満たしているものを数える (step1a).
+長さがnになるまでarrayに色（intで表現）をappendしてバックトラッキング。
+同じ色が3連続になったら引き返す。
+
+### コメント集
+
+https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.leqr94ydg2be
+
+#### https://discord.com/channels/1084280443945353267/1337642831824814192/1360598387388580055
+
+>OrderedDict の中身は Doubly-Linked List なので、まあ、練習としては、Doubly-Linked List 自体を書いて欲しい
+
+LRU cacheを自前で書けるか？という文脈みたい。やってみよ。
