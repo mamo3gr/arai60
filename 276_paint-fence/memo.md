@@ -124,3 +124,8 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 >OrderedDict の中身は Doubly-Linked List なので、まあ、練習としては、Doubly-Linked List 自体を書いて欲しい
 
 LRU cacheを自前で書けるか？という文脈みたい。やってみよ。
+
+## step 3
+
+末尾が同じ・違う組み合わせ数を更新するパターンがしっくりきた。
+空間計算量が `O(n)` の実装のほうが、漸化式に近い表現になっているが、まあ変換して読める。
