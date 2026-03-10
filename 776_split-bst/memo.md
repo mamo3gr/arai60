@@ -101,3 +101,8 @@ https://github.com/goto-untrapped/Arai60/pull/54#discussion_r1780641914
 https://github.com/Ryotaro25/leetcode_first60/pull/50#discussion_r1912058276
 
 再帰とループの中間形態。
+
+## step 3
+
+再帰の方が読みやすい。スタックの深さは最大 `O(N)` になるが、3000程度ならそこまで非常識でもない
+（Pythonではデフォルトの1000を引き上げる必要があるが）。
