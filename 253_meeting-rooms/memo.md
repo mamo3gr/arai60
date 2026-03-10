@@ -25,3 +25,57 @@
 https://docs.python.org/3/library/functions.html#sorted
 結論として `start` をキーとしてソート、で良さそう。
 そして `end` も何か追加の用途で使いたいなら、キーをタプルにしちゃえばいい。
+
+## step 2
+
+隣接する要素をインデックスで取りに行っているが、`itertools` に同様の処理がありそう。-> あった。  
+https://docs.python.org/3/library/itertools.html#itertools.pairwise
+
+### 他の人のコード
+
+#### https://github.com/Satorien/LeetCode/pull/54
+
+`[FREE for _ in range(1,000,000)]` のスケジュール配列に対し、`BOOKED` を埋めていくパターン (step1).
+スケジュールの分解能と最大長によってはこれでも解ける。なるほどー。
+
+step2は、自分のstep1と同様にソートして前後比較。
+
+#### https://github.com/shintaro1993/arai60/pull/59
+
+ソートして前後比較するのは同様だが(step2), `end = last_end_time` として、ループの次の `start` と比べると、
+隣接する要素を取り出すのではなく、`for inteval in intervals` のループで書ける。
+
+#### https://github.com/olsen-blue/Arai60/pull/56
+
+累積和の問題と考えて解く (step1).
+`schedule = [0 for _ in range(1,000,000+1)]` を用意しておいて、
+for each intervalに対し `schedule[start] += 1`, `schedule[end] -= 1` とする。
+最後に `schedule` の累積和を取ると、重複が発生する時間帯では1を超える。
+つまり時間帯ごとに必要な会議室の数を求めているということか。
+
+データ構造としてはかなり疎なので、変化がある点だけ覚えておくというアレンジもできそう。
+
+https://github.com/olsen-blue/Arai60/pull/56/changes#r2023904388
+
+>座標圧縮みたいなことをする手はありますね。
+
+言われてた。
+
+もとの解法を差分配列 (difference array) というらしい。
+
+#### https://github.com/hayashi-ay/leetcode/pull/59
+
+heapを使う手もある (step2).
+この問題ではソートを使うのが概ね有利そう。
+何らか途中で会議が追加されるときには、heapでは `O(log N)` で追加できる。
+
+`heapq` は扱うオブジェクトに `__lt__` の定義が必要らしいが、
+https://github.com/Satorien/LeetCode/pull/54 では自作の関数を割り当てていた。
+
+### コメント集
+
+発展問題の "Meeting Rooms II" の見出しはあるが、本問のものは見つからなかった。
+
+### パターンをいくつか
+
+step1でやってない解法を自分でも書いてみる。
