@@ -103,3 +103,16 @@ https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/
 >浮動小数点だったらこのままでは駄目ですよね。
 
 これは同じ感覚だったので安心した。
+
+## step 3
+
+heapアプローチは `len(active_meeting_ends)` が必要な会議室になる、というのが直感的でない。
+two-pointersやdifference arrayは、やっていることが同値なsweep line (step1) の方が分かりやすい。
+`(start, +1)`, `(end, -1)` を並び替えるとき、startとendのconflictを処理するために
+タプルの2番目の要素もキーにする、というのがちょっと分かりにくいかも。
+それよりはdictにすることで、同じ時刻の `+1/-1` をgroup byしてしまうほうが良さそう。
+最後の集約は `itertools.accumulate` が使えるけど、
+`max(total_demand for total_demand in itertools.accumulate(demand for demand in time_to_demand)`
+みたいに後ろから読ませるので負荷が高そう。`demands: list[int]` を作り直すのでもいいが、
+さらに情報をコピーするか？という気がする。
+愚直にforループで書く。
