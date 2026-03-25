@@ -111,3 +111,33 @@ leading zeroesは `int()` のパースに任せてよい。
 先に符号だけ自前で確定したあとで数字の範囲を探したほうが処理が楽そう。
 
 Pythonなのでオーバーフロー対策は特に必要なし。
+
+## 再訪：int()を使わない実装
+
+https://github.com/mamo3gr/arai60/pull/54/changes#r2882808316
+
+>仮に自分がこの問題を面接で出題するとしたら、 int() の実装をするようお願いすると思います。おそらくここがこの問題のポイントの一つなのではないかと思います。
+
+便利関数である `int()` に頼っていた。実務上はこれを使う（自分で実装しない）のが適切だが、
+勉強のために自分でも書いてみる (step4.py).
+オーバーフローの判定は、はじめ次のように書いていたが、
+
+```python
+if is_minus:
+    overflow = integer < (INT_MIN + digit) / 10
+    if overflow:
+        return INT_MIN
+    integer = integer * 10 - digit
+else:
+    overflow = integer > (INT_MAX - digit) / 10
+    if overflow:
+        return INT_MAX
+    integer = integer * 10 + digit
+```
+
+Geminiによると、
+
+* Pythonの負数の計算は、C言語などの「0方向への切り捨て」とは異なり、「負の無限大方向への切り捨て」になる
+* 桁数によっては（本問では32bit整数だが、例えば64bit整数への拡張時に）、オーバーフローの判定が謝る
+
+ことから、整数演算でやるのがいいらしい。
